@@ -1,5 +1,6 @@
 <template>
-  <HelloWorld />
+  <Header/>
+  <CTAButton/>
 </template>
 
 <script lang="ts" setup>
