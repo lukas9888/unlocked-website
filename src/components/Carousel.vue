@@ -8,7 +8,8 @@
       <v-hover v-slot:default="{ isHovering, props }">
         <v-icon
           v-bind="props"
-          :class="['rotate180', isHovering ? 'icon-transition' : '']"
+          class="left-icon"
+          :class="isHovering ? 'left-icon-transition' : ''"
           @click="props.onClick"
         >
           mdi-key
@@ -20,7 +21,8 @@
       <v-hover v-slot:default="{ isHovering, props }">
         <v-icon
           v-bind="props"
-          :class="isHovering ? 'icon-transition' : ''"
+          class="right-icon"
+          :class="isHovering ? 'right-icon-transition' : ''"
           @click="props.onClick"
         >
           mdi-key
@@ -47,15 +49,27 @@
 </template>
 
 <script setup lang="ts">
-// Script setup here if needed
+
 </script>
 
 <style scoped>
-.icon-transition {
-  transition: transform 0.7s ease;
+.right-icon {
   transform: rotateX(180deg);
+  transition: transform 0.7s ease;
 }
-.rotate180 {
-  transform: rotateY(180deg);
+
+.left-icon {
+  transform: rotateY(180deg) rotateX(180deg);
+  transition: transform 0.7s ease;
+}
+
+.right-icon-transition {
+  transform: rotateX(360deg);
+  transition: transform 0.7s ease;
+}
+
+.left-icon-transition {
+  transform: rotateY(180deg) rotateX(360deg);
+  transition: transform 0.7s ease;
 }
 </style>

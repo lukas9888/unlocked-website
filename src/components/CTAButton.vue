@@ -18,7 +18,7 @@
 
 <style scoped>
 .icon-transition {
-  transition: transform 0.3s ease;
+  transition: transform 0.7s ease;
   transform: rotate(360deg);
 }
 .primary-btn {
