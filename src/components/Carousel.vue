@@ -6,27 +6,41 @@
   >
     <template v-slot:prev>
       <v-hover v-slot:default="{ isHovering, props }">
-        <v-icon
+        <v-btn
+          size="x-large"
+          variant="plain"
           v-bind="props"
+          height="100%"
+          :ripple="false"
+        >
+        <v-icon
           class="left-icon"
           :class="isHovering ? 'left-icon-transition' : ''"
           @click="props.onClick"
         >
           mdi-key
         </v-icon>
+        </v-btn>
       </v-hover>
     </template>
 
     <template v-slot:next>
       <v-hover v-slot:default="{ isHovering, props }">
-        <v-icon
+        <v-btn
+          size="x-large"
+          variant="plain"
           v-bind="props"
+          height="100%"
+          :ripple="false"
+        >
+        <v-icon
           class="right-icon"
           :class="isHovering ? 'right-icon-transition' : ''"
           @click="props.onClick"
         >
           mdi-key
         </v-icon>
+        </v-btn>
       </v-hover>
     </template>
 
@@ -55,21 +69,21 @@
 <style scoped>
 .right-icon {
   transform: rotateX(180deg);
-  transition: transform 0.7s ease;
+  transition: transform 0.7s ease-in-out;
 }
 
 .left-icon {
   transform: rotateY(180deg) rotateX(180deg);
-  transition: transform 0.7s ease;
+  transition: transform 0.7s ease-in-out;
 }
 
 .right-icon-transition {
   transform: rotateX(360deg);
-  transition: transform 0.7s ease;
+  transition: transform 0.7s ease-in-out;
 }
 
 .left-icon-transition {
   transform: rotateY(180deg) rotateX(360deg);
-  transition: transform 0.7s ease;
+  transition: transform 0.7s ease-in-out;
 }
 </style>

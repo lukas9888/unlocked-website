@@ -1,5 +1,6 @@
 <template>
   <Header/>
+  <Contact/>
   <CTAButton/>
   <Carousel/>
   </template>
