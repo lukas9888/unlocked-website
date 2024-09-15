@@ -1,8 +1,9 @@
 <template>
   <Header/>
-  <Contact/>
+  <aboutMeImg/>
   <CTAButton/>
   <Carousel/>
+  <Contact/>
   </template>
 
 <script lang="ts" setup>

@@ -8,7 +8,7 @@
       <v-hover v-slot:default="{ isHovering, props }">
         <v-btn
           size="x-large"
-          variant="plain"
+          variant="text"
           v-bind="props"
           height="100%"
           :ripple="false"
@@ -28,7 +28,7 @@
       <v-hover v-slot:default="{ isHovering, props }">
         <v-btn
           size="x-large"
-          variant="plain"
+          variant="text"
           v-bind="props"
           height="100%"
           :ripple="false"

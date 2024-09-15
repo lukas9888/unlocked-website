@@ -11,13 +11,15 @@
             </h1>
           </v-card-title>
           <v-btn
-            class="mx-auto primary-btn"
+            variant="plain"
+            class="mx-auto"
+            :ripple="false"
             >
-              Email
             <v-icon
-              class="ml-2">
+              class="mr-2">
               mdi-email
             </v-icon>
+              lukas@unlocked.dk
           </v-btn>
         </v-card>
       </v-col>
@@ -26,3 +28,11 @@
 </template>
 <script setup lang="ts">
 </script>
+
+<style scoped>
+.primary-btn {
+border-radius: 25px;
+background-color: #02CFAA;
+color: black;
+}
+</style>
