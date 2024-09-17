@@ -1,22 +1,22 @@
 <template>
-  <v-hover v-slot="{ isHovering, props }">
     <v-img
     class="bgimg"
     src="..\assets\Lukas.jpg"
-    v-bind="props"
     cover
     >
-  <v-expand-transition>
+    <v-container
+      class="content-container"
+    >
     <v-card
-      class="v-card--reveal"
-      max-width="1200"
+      class="about-me-card align-center justify-center"
+      :class="isCardExpanded ? 'about-me-card-transition' : 'about-me-card'"
       tile
-      v-if="isHovering"
     >
       <v-card-title>
         <h1>About me</h1>
       </v-card-title>
-      <v-card-text>
+      <v-card-text
+      >
         <p>
           I am a product owner with a developer mindset and a passion for creating beautiful and functional web applications.
           I have experience with a wide range of technologies, including Vue.js, Typescript, Python, and PostgreSQL.
@@ -24,30 +24,62 @@
         </p>
       </v-card-text>
     </v-card>
-  </v-expand-transition>
+      </v-container>
     </v-img>
-  </v-hover>
 </template>
+
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+
+const isCardExpanded = ref(false);
+
+function handleScroll() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  // Adjust the scroll threshold as needed
+  if (scrollTop > 100) {
+    isCardExpanded.value = true;
+  } else {
+    isCardExpanded.value = false;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+</script>
 
 <style scoped>
 .bgimg {
-  opacity: 0.4;
-}
-.bgimg:hover {
-  transition: opacity 1s;
-  opacity: 0.9;
-}
-
-
-.bgimg {
+  opacity: 0.8;
   width: 100%;
 }
+.content-container {
+  position: absolute;
+  top: -25%;
+  left: -25%;
+  height: 100%;
+  display: flex;
+  align-items: center; /* Centers the content vertically */
+  justify-content: flex-start; /* Aligns the content to the left */
+  padding-left: 20px; /* Add some padding to the left if necessary */
+}
 
- .v-card--reveal {
+ .about-me-card {
+
    margin: auto;
-   align-items: center;
-   justify-content: center;
-   opacity: .4;
-   width: 100%;
+   opacity: 0.7;
+   max-width:500px;
  }
+
+.about-me-card-transition {
+
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background: black;
+}
 </style>
