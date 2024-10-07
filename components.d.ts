@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AboutMe: typeof import('./src/components/AboutMe.vue')['default']
     AboutMeImg: typeof import('./src/components/AboutMeImg.vue')['default']
     Carousel: typeof import('./src/components/Carousel.vue')['default']
     Contact: typeof import('./src/components/Contact.vue')['default']

@@ -1,46 +1,59 @@
 <template>
-    <v-img
-    class="bgimg"
-    src="..\assets\Lukas.jpg"
-    cover
-    >
-    <v-container
-      class="content-container"
-    >
-    <v-card
-      class="about-me-card align-center justify-center"
-      :class="isCardExpanded ? 'about-me-card-transition' : 'about-me-card'"
-      tile
-    >
-      <v-card-title>
-        <h1>About me</h1>
-      </v-card-title>
-      <v-card-text
-      >
-        <p>
-          I am a product owner with a developer mindset and a passion for creating beautiful and functional web applications.
-          I have experience with a wide range of technologies, including Vue.js, Typescript, Python, and PostgreSQL.
-          I am always looking for new challenges and opportunities to learn and grow.
-        </p>
-      </v-card-text>
-    </v-card>
-      </v-container>
-    </v-img>
+  <div class="container">
+    <div class="scrolling"
+         :class="scrollingClass">
+      <div class="bg">
+        <img src="../assets/Lukas.jpg" alt="Background Image">
+      </div>
+      <div class="about">
+        <div class="about-content">
+          <h1>About me</h1>
+          <p>
+            I am a product owner with a developer mindset and a passion for creating beautiful and functional web applications.
+            I have experience with a wide range of technologies, including Vue.js, Typescript, Python, and PostgreSQL.
+            I am always looking for new challenges and opportunities to learn and grow.
+          </p>
+        </div>
+      </div>
+    </div>
+    <ul class="scroll-wrap">
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
-const isCardExpanded = ref(false);
+const scrollingClass = ref('scrolling step-1');
 
 function handleScroll() {
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
-  // Adjust the scroll threshold as needed
-  if (scrollTop > 100) {
-    isCardExpanded.value = true;
-  } else {
-    isCardExpanded.value = false;
-  }
+  const winTop = window.scrollY || document.documentElement.scrollTop;
+  const winHeight = window.innerHeight;
+  const winMid = winHeight / 2 + winTop;
+  const winBot = winHeight + winTop;
+
+  const listItems = document.querySelectorAll('.scroll-wrap li');
+  let inViewIndex = 0;
+
+  listItems.forEach((li, index) => {
+    const rect = li.getBoundingClientRect();
+    const liTop = rect.top + winTop;
+    const liBot = liTop + rect.height;
+
+    if (liBot <= winMid || liTop >= winBot) {
+      li.classList.remove('inView');
+    } else if (liTop <= winMid) {
+      li.classList.add('inView');
+      inViewIndex = index + 1;
+    } else {
+      li.classList.remove('inView');
+    }
+  });
+
+  scrollingClass.value = `scrolling step-${inViewIndex || 1}`;
 }
 
 onMounted(() => {
@@ -53,33 +66,81 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.bgimg {
-  opacity: 0.8;
-  width: 100%;
-}
-.content-container {
-  position: absolute;
-  top: -25%;
-  left: -25%;
-  height: 100%;
-  display: flex;
-  align-items: center; /* Centers the content vertically */
-  justify-content: flex-start; /* Aligns the content to the left */
-  padding-left: 20px; /* Add some padding to the left if necessary */
+.container {
+  margin: 0;
+  padding: 0;
 }
 
- .about-me-card {
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
-   margin: auto;
-   opacity: 0.7;
-   max-width:500px;
- }
+.scroll-wrap {
+  position: relative;
+}
 
-.about-me-card-transition {
+.scroll-wrap li {
+  height: 100vh;
+}
 
+.scrolling {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.6;
+  color: #fff;
   background: black;
+}
+
+.scrolling .bg {
+  width: 100vw;
+  height: 120vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scrolling .bg img {
+  width: 100%;
+  height: auto;
+  transition: 1s;
+}
+
+.about {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.about-content {
+  display: inline-block;
+  text-align: left;
+  margin-top: 20%;
+  width: 50%;
+  color: white;
+  transform: scale(2);
+  transition: transform 1s;
+}
+
+.scrolling.step-2 .about {
+  opacity: 1;
+}
+
+.scrolling.step-2 .about-content {
+  transform: scale(1);
+}
+
+.scrolling.step-3 .about-content {
+  transform: scale(0.5);
 }
 </style>
