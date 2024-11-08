@@ -1,7 +1,7 @@
 <template>
   <Header/>
   <AboutMe/>
-  <CTAButton/>
+  <Skills/>
   <Carousel/>
   <Contact/>
   </template>
