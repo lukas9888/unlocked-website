@@ -4,24 +4,40 @@
     <h1>Skills</h1>
     <v-row>
       <v-col
-        v-for="n in 8"
-        :key="n"
+        v-for="skill in skills"
+        :key="skill.id"
         cols="12"
+        sm="6"
         md="3"
       >
         <v-item v-slot="{ isSelected, selectedClass, toggle }">
+          <div class="card-container">
+              <v-card class="text-behind">
+                <template v-slot:prepend>
+                  <a 
+                  :href="skill.link" 
+                  class="text-white"
+                  >
+                <v-avatar :image="skill.link" rounded="0" class="ma-2"></v-avatar>
+              <v-card-title>{{skill.name}}</v-card-title>
+              </a>
+            </template>
+                <v-card-text>More about the wonders of the newly founded technology {{ skill.name }}</v-card-text>
+              </v-card>
           <v-card
-            :class="['d-flex align-center', selectedClass]"
+            :class="['d-flex align-center', selectedClass, {'selected-card': isSelected}]"
             height="200"
-            dark
+            color="black"
             @click="toggle"
           >
-            <div
-              class="text-h3 flex-grow-1 text-center"
-            >
-              skill {{ n }}
+            <div class="text-h3 flex-grow-1 text-center">
+              <v-img 
+                :src="skill.link"
+                height="150"
+              />
             </div>
           </v-card>
+        </div>
         </v-item>
       </v-col>
     </v-row>
@@ -33,8 +49,45 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-let skill = [{id:1, name:"hej"}, {id:2, name:"med"}, {id:3, name:"dig"}];
+const skills = ref([
+  {id:1, name:"Supabase", link:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg", type:"technical"},
+  {id:2, name:"Vue", link:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg", type:"technical"},
+  {id:3, name:"TypeScript", link:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg", type:"technical"},
+  {id:4, name:"PostgreSQL", link:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg", type:"technical"}]);
 </script>
 
 <style scoped>
+.card-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+
+.text-behind {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  z-index: 0;
+  opacity: 1;
+}
+
+.v-card {
+  transform-origin: left;
+  transition: all 1.5s ease-in-out;
+}
+
+.selected-card {
+  transform: 
+  perspective(800px)
+  rotateY(-100deg);
+}
+
+.v-card:hover {
+  transform-style: preserve-3d;
+}
+
+.selected-card ~ .text-behind {
+  opacity: 1;
+}
 </style>
