@@ -78,23 +78,28 @@ const skills = ref([
 
 .skill-card {
   transform-origin: left;
-  transition: all 1.5s ease-in-out;
+  transition: 
+  transform 1.5s ease-in-out,
+  opacity 0.5s ease-in-out, 
+  border 0s ease-in-out; 
   display: flex;
   align-items: center;
 }
 
 .selected-card {
   transform: 
-  perspective(1000px)
-  rotateY(-120deg);
-  border: 1px solid white;
-
-
+  perspective(600px)
+  rotateY(-90deg);
+  /* border: 1px solid white; */
+  /* opacity:0; */
+  transition: 
+    transform 1.5s ease-in-out;
+    /* opacity 0.5s ease-in-out 1.5s,
+    border 0s ease-in-out 1.5s; */
 }
 
 .skill-card:hover {
-  border: 1px solid white;
-
+  /* border: 1px solid white; */
 }
 
 .door-handle {
@@ -102,15 +107,14 @@ const skills = ref([
   position:absolute;
   right:8%;
   transform: rotate(-135deg);
-  transition: opacity 1.5s ease-in-out;
 }
-.skill-card:hover .door-handle {
+/* .skill-card:hover .door-handle {
   opacity: 1;
 }
 
 .selected-card .door-handle {
   opacity: 1;
   transform: rotate(-155deg);
-  /* transition: transform 0.5s ease-out; */
-}
+  transition: transform 0.5s ease-out;
+} */
 </style>
