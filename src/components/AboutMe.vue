@@ -1,5 +1,6 @@
 <template>
     <v-sheet
+    id="about-me"
     class="section">
       <v-img
         gradient="to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)"
@@ -29,5 +30,8 @@
 .section {
   background-color: black;
   min-height:100vh;
+}
+p {
+  max-width: 450px;
 }
 </style>

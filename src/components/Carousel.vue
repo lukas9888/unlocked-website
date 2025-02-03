@@ -1,4 +1,7 @@
 <template>
+    <v-sheet
+    id="projects"
+    class="section">
   <v-carousel
     height="400"
     hide-delimiter-background
@@ -60,6 +63,7 @@
       </v-sheet>
     </v-carousel-item>
   </v-carousel>
+</v-sheet>
 </template>
 
 <script setup lang="ts">

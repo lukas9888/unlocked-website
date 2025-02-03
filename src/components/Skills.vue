@@ -1,5 +1,6 @@
 <template>
-<v-item-group>
+<v-item-group
+id="skills">
   <v-container>
     <h1>Skills</h1>
     <v-row>
@@ -98,9 +99,9 @@ const skills = ref([
     border 0s ease-in-out 1.5s; */
 }
 
-.skill-card:hover {
-  /* border: 1px solid white; */
-}
+/* .skill-card:hover {
+  border: 1px solid white;
+}  */
 
 .door-handle {
   opacity:0;

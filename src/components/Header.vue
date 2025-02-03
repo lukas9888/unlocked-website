@@ -3,13 +3,14 @@
    <v-row justify="center" no-gutters>
      <v-btn
        v-for="link in links"
-       :key="link"
+       :key="link.name"
+       :href="link.href"
        class="mx-2 secondary-btn"
        color="white"
        rounded="xl"
        variant="text"
      >
-       {{ link }}
+       {{ link.name }}
      </v-btn>
    </v-row>
  </v-footer>
@@ -17,9 +18,10 @@
 
 <script setup lang="ts">
   const links = [
-    'About me',
-    'Projects',
-    'Contact',
+    {name:'About me', href:'#about-me'},
+    {name:'Skills', href:'#skills'},
+    {name:'Projects', href:'#projects'},
+    {name:'Contact', href:'#contact'}
   ]
 
 </script>
